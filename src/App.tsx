@@ -17,7 +17,7 @@ export default class App extends React.Component<Appprops, AppState> {
     super(props);
 
     // an example array of items to be paged
-    var exampleItems = [...Array(3000).keys()].map(i => ({ id: (i + 1), name: 'Item ' + (i + 1) }));
+    var exampleItems = Array.from(Array(200).keys()).map(i => ({ id: (i + 1), name: 'Item ' + (i + 1) }))
     this.state = {
       exampleItems: exampleItems,
       pageOfItems: [],

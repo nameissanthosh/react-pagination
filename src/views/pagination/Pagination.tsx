@@ -2,7 +2,7 @@ import React from 'react';
 
 type PaginationProps = {
     items: {}[],
-    onChangePage: (data?: object) => void,
+    onChangePage: (data: object) => void,
     initialPage: number,
     pageSize: number
 }
@@ -85,7 +85,8 @@ export default class Pagination extends React.Component<PaginationProps, Paginat
         var startIndex = (currentPage - 1) * pageSize;
         var endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
         // create an array of pages to ng-repeat in the pager control
-        var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
+        // var pages = [...Array((endPage + 1) - startPage).keys()].map(i => startPage + i);
+        var pages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i)
 
         // return object with all pager properties required by the view
         return {
@@ -111,27 +112,27 @@ export default class Pagination extends React.Component<PaginationProps, Paginat
         return <nav aria-label="Page navigation example">
             <ul className="pagination">
                 <li className={`page-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(1)} aria-label="First">
+                    <a role="button" className="page-link" onClick={() => this.setPage(1)} aria-label="First">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li className={`page-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(pager.currentPage - 1)}>
+                    <a role="button" className="page-link" onClick={() => this.setPage(pager.currentPage - 1)}>
                         <span aria-hidden="true">&lt;</span>
                     </a>
                 </li>
                 {pager.pages.map((page: number, index: number) =>
                     <li key={index} className={`page-item ${pager.currentPage === page ? 'active' : ''}`}>
-                        <a className="page-link" onClick={() => this.setPage(page)}>{page}</a>
+                        <a role="button" className="page-link" onClick={() => this.setPage(page)}>{page}</a>
                     </li>
                 )}
                 <li className={`page-item ${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(pager.currentPage + 1)}>
+                    <a role="button" className="page-link" onClick={() => this.setPage(pager.currentPage + 1)}>
                         <span aria-hidden="true">&gt;</span>
                     </a>
                 </li>
                 <li className={`page-item ${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => this.setPage(pager.totalPages)} aria-label="Last">
+                    <a role="button" className="page-link" onClick={() => this.setPage(pager.totalPages)} aria-label="Last">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
